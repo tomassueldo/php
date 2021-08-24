@@ -1,8 +1,8 @@
 <?php
 
-function contar($array) {
+function contar($aArray) {
     $contador = 0;
-    foreach($array as $elemento) {
+    foreach($aArray as $elemento) {
         $contador += 1;
     }
     return $contador;
