@@ -1,1 +1,1 @@
-[{"dni":"42944161","nombre":"Tomas","telefono":"123456789","correo":"tomas@gmail.com"}]
+[{"dni":"sdaasd","nombre":"123321123","telefono":"asdasd","correo":"asdasd","archivo":"2021090112095644.jpg"}]
