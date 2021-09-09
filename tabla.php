@@ -48,7 +48,7 @@
                         <td>$199.999</td>
                     </tr>
                     <tr>
-                        <td colspan="2">TOTAL:</td> <!--COLSPAN CORRE COLUMNAS-->
+                        <td colspan="1">TOTAL:</td> <!--COLSPAN CORRE COLUMNAS-->
                         <td>$9.595.298</td>
                     </tr>
                     </tbody>

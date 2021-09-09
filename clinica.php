@@ -46,7 +46,7 @@ $aPacientes[] = array(
 <body>
 
     <main>
-        <div class="container">
+            <div class="container">
             <div class="row">
                 <div class="col-12">
                     <h1 class="text-left">Listado de pacientes</h1>
