@@ -5,11 +5,19 @@ error_reporting(E_ALL);
 
 
 
-class Persona{
+abstract class Persona{
     protected $dni;
     protected $nombre;
     protected $correo;
     protected $celular;
+
+    public function __construct($dni, $nombre, $correo, $celular)
+    {
+        $this->dni = $dni;
+        $this->nombre = $nombre;
+        $this->correo = $correo;
+        $this->celular = $celular;
+    }
 
     public function __get($propiedad) {
         return $this->$propiedad;
@@ -31,10 +39,7 @@ class Alumno extends Persona{
 
     public function __construct($dni, $nombre, $correo, $celular, $fechaNac)
     {
-        $this->dni = $dni;
-        $this->nombre = $nombre;
-        $this->correo = $correo;
-        $this->celular = $celular;
+        parent::__construct($dni,$nombre,$correo,$celular);
         $this->fechaNac = $fechaNac;
         $this->peso = 0.0;
         $this->altura = 0.0;
@@ -70,10 +75,7 @@ class Entrenador extends Persona{
 
     public function __construct($dni, $nombre, $correo, $celular)
     {
-        $this->dni = $dni;
-        $this->nombre = $nombre;
-        $this->correo = $correo;
-        $this->celular = $celular;
+        parent::__construct($dni,$nombre,$correo,$celular);
     }
 }
 

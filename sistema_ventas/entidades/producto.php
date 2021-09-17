@@ -1,13 +1,14 @@
 <?php 
 
 
-class Usuario {
-    private $idusuario;
-    private $usuario;
-    private $clave;
+class Producto {
+    private $idproducto;
     private $nombre;
-    private $apellido;
-    private $correo;
+    private $cantidad;
+    private $precio;
+    private $descripcion;
+    private $fk_idtipoproducto;
+    private $imagen;
 
     public function __construct(){
 

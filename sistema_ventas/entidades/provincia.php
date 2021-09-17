@@ -1,7 +1,6 @@
 <?php
 
-class Provincia
-{
+class Provincia {
     private $idprovincia;
     private $nombre;
 

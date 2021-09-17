@@ -3,8 +3,8 @@
 class Localidad{
     private $idlocalidad;
     private $nombre;
-    private $fk_idprovincia;
     private $cod_postal;
+    private $fk_idprovincia;
 
     public function __construct(){
 
