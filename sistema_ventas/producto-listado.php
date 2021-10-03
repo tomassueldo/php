@@ -1,5 +1,11 @@
 <?php
-include_once("header.php");
+include "header.php";
+include_once "config.php";
+include_once "entidades/producto.php";
+
+$producto = new Producto();
+$aProductos = $producto->obtenerTodos();
+
 ?>
 
 <div class="container-fluid">
@@ -15,8 +21,19 @@ include_once("header.php");
             <th>Nombre</th>
             <th>Cantidad</th>
             <th>Precio</th>
-            <th class="text-right">Acciones</th>
+            <th style="width: 110px;">Acciones</th>
         </tr>
+        <?php foreach($aProductos as $producto): ?>
+            <tr>
+                <td><img src="img/<?php echo $producto->imagen; ?>"class="img-thumbnail"></td>
+                <td><?php echo $producto->nombre; ?></td>
+                <td><?php echo $producto->cantidad; ?></td> 
+                <td><?php echo "$ " . number_format($producto->precio, 2, ",", "."); ?></td>
+                <td style="width: 100px;">
+                    <a href="producto-formulario.php?id=<?php echo $producto->idproducto; ?>"><i class="fas fa-search"></i></a>
+                </td>
+            </tr>
+        <?php endforeach; ?>
     </table>
 </div>
 

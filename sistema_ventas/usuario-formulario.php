@@ -32,10 +32,8 @@ if (isset($_GET["id"]) && $_GET["id"] > 0) {
 
 include_once "header.php";
 ?>
-        <!-- Begin Page Content -->
         <div class="container-fluid">
 
-          <!-- Page Heading -->
           <h1 class="h3 mb-4 text-gray-800">Usuario</h1>
             <div class="row">
                 <div class="col-12 mb-3">
@@ -69,8 +67,7 @@ include_once "header.php";
                 </div>
             </div>
         </div>
-        <!-- /.container-fluid -->
-
       </div>
-      <!-- End of Main Content -->
+
+      
 <?php include_once "footer.php";?>

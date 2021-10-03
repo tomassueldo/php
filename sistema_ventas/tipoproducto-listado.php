@@ -1,4 +1,11 @@
 <?php
+include_once "config.php";
+include_once "entidades/tipoproducto.php";
+
+
+$tipoProducto = new TipoProducto();
+$aTipoProductos = $tipoProducto->obtenerTodos();
+
 include_once("header.php");
 ?>
 
@@ -12,8 +19,16 @@ include_once("header.php");
     <table class="table table-hover border">
         <tr>
             <th>Nombre</th>
-            <th class="text-right">Accciones</th>
+            <th style="width: 110px;">Accciones</th>
         </tr>
+        <?php foreach($aTipoProductos as $tipoProducto): ?>
+            <tr>
+                <td><?php echo $tipoProducto->nombre; ?></td>
+                <td style="width: 110px;">
+                    <a href="tipoproducto-formulario.php?id=<?php echo $tipoProducto->idtipoproducto; ?>"><i class="fas fa-search"></i></a>
+                </td>
+            </tr>
+        <?php endforeach; ?>
     </table>
 </div>
 

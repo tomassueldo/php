@@ -1,10 +1,56 @@
 <?php
+
+
 include_once("header.php");
+include_once "config.php";
+include_once "entidades/tipoproducto.php";
+
+$pg = "Tipo Producto Formulario";
+
+
+$tipoProducto = new TipoProducto();
+$tipoProducto->cargarFormulario($_REQUEST);
+
+
+if($_POST){
+    if(isset($_POST["btnGuardar"])){
+        if(isset($_GET["id"]) && $_GET["id"] > 0){
+              //Actualizo un cliente existente
+              $tipoProducto->actualizar();
+        } else {
+            //Es nuevo
+            $tipoProducto->insertar();
+        }
+        $msg["texto"] = "Guardado correctamente";
+        $msg["codigo"] = "alert-success";
+
+    } else if(isset($_POST["btnBorrar"])){
+        $tipoProducto->eliminar();
+        header("Location: tipoproducto-listado.php");
+    }
+} 
+
+if(isset($_GET["id"]) && $_GET["id"] > 0){
+    $tipoProducto->obtenerPorId();
+}
+
+
+
+
 ?>
 
 
 <div class="container-fluid">
     <h1 class="h3 mb-4 text-gray-800">Tipo de productos</h1>
+    <?php if(isset($msg)) :?>
+        <div class="row">
+            <div class="col-12 mb-3">
+                <div class="alert <?php echo $msg["codigo"]; ?>">
+                    <?php echo $msg["texto"]; ?>
+                </div>
+            </div>
+        </div>
+    <?php endif; ?>
     <div class="row">
         <div class="col-12 mb-3">
             <a href="tipoproducto-listado.php" class="btn btn-primary mr-2">Listado</a>
@@ -16,7 +62,7 @@ include_once("header.php");
     <div class="row">
         <div class="col-12 form-group">
             <label for="txtNombre">Nombre:</label>
-            <input type="text" required="" class="form-control" id="txtNombre" name="txtNombre">
+            <input type="text" required="" class="form-control" id="txtNombre" name="txtNombre" value="<?php echo $tipoProducto->nombre ?>">
         </div>
     </div>
 </div>
