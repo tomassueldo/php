@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        function miSandwich(ing1,ing2,funcionMensaje){
+            console.log("Estoy comiendo un sandwich de: " + ing1 + " y " + ing2 + ".");
+            funcionMensaje();
+        }
+
+        function parametro(){
+            console.log("Termine de comer mi sandwich");
+        }
+
+        miSandwich("jamon", "queso", parametro);
+    </script>
+</body>
+</html>
