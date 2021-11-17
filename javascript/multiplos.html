@@ -1,18 +1,20 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Multiplos</title>
 </head>
+
 <body>
     <script>
         //A
-        var aValores = [7,21,15,3,10,70, 28];
+        var aValores = [7, 21, 15, 3, 10, 70, 28];
 
-        aValores.forEach(function(value, index){
-            if(value % 7 == 0){
+        aValores.forEach(function (value, index) {
+            if (value % 7 == 0) {
                 document.write(value + "<br>");
             }
         });
@@ -20,19 +22,19 @@
         //B
         document.write("----------------" + "<br>");
 
-        function imprimirListado(aArray){
-            aArray.forEach(function(value,index){
+        function imprimirListado(aArray) {
+            aArray.forEach(function (value, index) {
                 document.write(value + "<br>");
             });
         }
         imprimirListado(aValores);
-        
+
         document.write("----------------" + "<br>");
 
         //C
-        aValores.filter(function(value){
+        aValores.filter(function (value) {
             let aValoresNuevo = [];
-            if(value % 7 == 0){
+            if (value % 7 == 0) {
                 aValoresNuevo.push(value);
             }
 
@@ -42,16 +44,16 @@
         document.write("----------------" + "<br>");
 
         //D
-        aValores.map(function(value){
-            let aValoresNuevo = [];
-            valueCuadrado = value * value;
-            aValoresNuevo.push(valueCuadrado);
-            imprimirListado(aValoresNuevo);
-        });
-        
 
-        
+        aRaiz = aValores.map(function (value) {
+            return Math.sqrt(value);
+        });
+        imprimirListado(aRaiz);
+
+
+
 
     </script>
 </body>
+
 </html>

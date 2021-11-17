@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Poo JS</title>
+</head>
+<body>
+    <script>
+        var persona = {
+            edad: 21,
+            nombre: "Tomas",
+            apellido: "Sueldo",
+            sexo: "Masculino",
+            estado_civil: "Soltero",
+            aPeliculas: ["Volver al futuro", "Star Wars", "Indiana Jones"],
+
+            cumplirAnios: function(){
+                return persona.edad +=1
+            },
+            
+            comer: function(comida){
+                console.log("Estoy comiendo: " + comida)
+            }
+        }
+
+        console.log(persona);
+        persona.comer("Fideos");
+        persona.cumplirAnios();
+        console.log(persona);
+
+    </script>
+</body>
+</html>
