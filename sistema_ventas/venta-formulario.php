@@ -1,4 +1,7 @@
-<?php 
+<?php
+
+use function PHPSTORM_META\exitPoint;
+
 include_once "config.php";
 include_once "entidades/venta.php";
 include_once "entidades/cliente.php";
@@ -29,6 +32,18 @@ if($_POST){
 
 if(isset($_GET["id"]) && $_GET["id"] > 0){
     $venta->obtenerPorId();
+}
+
+if(isset($_GET["do"]) && $_GET["do"] == "buscarProducto"){
+    $aResultado = array();
+    $idProducto = $_GET["id"];
+    $producto = new Producto();
+    $producto->idproducto = $idProducto;
+    $producto->obtenerPorId();
+    $aResultado["precio"] = $producto->precio;
+    $aResultado["cantidad"] = $producto->cantidad;
+    echo json_encode($aResultado);
+    exit();
 }
 
 
@@ -120,7 +135,7 @@ include_once("header.php");
         </div>
         <div class="col-6 form-group">
             <label for="lstProducto">Producto:</label>
-            <select name="lstProducto" id="lstProducto" class="form-control">
+            <select name="lstProducto" id="lstProducto" class="form-control" onchange="fBuscarPrecio();">
                 <option value disabled selected>Seleccionar</option>
                 <?php foreach($aProductos as $producto): ?>
                     <?php if($venta->fk_idproducto == $producto->idproducto): ?>
@@ -133,12 +148,13 @@ include_once("header.php");
         </div>
         <div class="col-6 form-group">
             <label for="txtPrecio">Precio unitario:</label>
-            <input type="text" name="txtPrecio" id="txtPrecio" class="form-control" value="$ <?php echo $venta->preciounitario; ?>" disabled>
+            <input type="text" name="txtPrecio" id="txtPrecioUniCurrency" class="form-control" value="$ <?php echo $venta->preciounitario; ?>" disabled>
             <input type="hidden" name="txtPrecioUni" id="txtPrecioUni" class="form-control" value="<?php echo $venta->preciounitario; ?>">
         </div>
         <div class="col-6 form-group">
             <label for="txtCantidad">Cantidad:</label>
-            <input type="text" name="txtCantidad" id="txtCantidad" class="form-control" value="<?php echo $venta->cantidad; ?>">
+            <input type="text" name="txtCantidad" id="txtCantidad" class="form-control" value="<?php echo $venta->cantidad; ?>" onchange="fCalcularTotal();">
+            <span id="msgStock" class="text-danger" style="display:none;">No hay stock suficiente</span>
         </div>
         <div class="col-6 form-group">
             <label for="txtTotal">Total:</label>
@@ -146,6 +162,79 @@ include_once("header.php");
         </div>
     </div>
 </div>
+
+<script>
+    function fBuscarPrecio(){
+        let idProducto = $("#lstProducto option:selected").val();
+        $.ajax({
+            type: "GET",
+            url: "venta-formulario.php?do=buscarProducto",
+            data: { id:idProducto},
+            async: true,
+            dataType: "json",
+            success: function (respuesta) {
+                strResultado = Intl.NumberFormat("es-AR", {style: 'currency', currency: 'ARS'}).format(respuesta.precio);
+                $("#txtPrecioUniCurrency").val(strResultado);
+                $("#txtPrecioUni").val(respuesta.precio);
+            }
+        })
+    }
+
+
+    function fCalcularTotal(){
+        let idProducto = $("#lstProducto option:selected").val();
+        let cantidad = parseFloat($("#txtCantidad").val());
+        let precioUnitario = parseInt($("#txtPrecioUni").val());
+        resultado = cantidad * precioUnitario;
+
+        //Lamada ajax
+        $.ajax({
+            type: "GET",
+            url: "venta-formulario.php?do=buscarProducto",
+            data: { id:idProducto},
+            async: true,
+            dataType: "json",
+            success: function (respuesta) {
+                if(cantidad > respuesta.cantidad){
+                    $("#msgStock").show();
+                }else{
+                    $("#msgStock").hide();
+                    strResultado = Intl.NumberFormat("es-AR", {style: 'currency', currency: 'ARS'}).format(resultado);
+                    $("#txtTotal").val(strResultado);
+                }
+            }
+        })
+    }
+
+    /*
+
+    
+    function fCalcularTotal(){
+    var idProducto = $("#lstProducto option:selected").val();
+    var precio = parseFloat($('#txtPrecioUni').val());
+    var cantidad = parseInt($('#txtCantidad').val());
+
+     $.ajax({
+        type: "GET",
+        url: "venta-formulario.php?do=buscarProducto",
+        data: { id:idProducto },
+        async: true,
+        dataType: "json",
+        success: function (respuesta) {
+            let resultado = 0;
+            if(cantidad <= parseInt(respuesta.cantidad)){
+                resultado = precio * cantidad;
+                 $("#msgStock").hide();
+            } else {
+                $("#msgStock").show();
+            }
+            strResultado = Intl.NumberFormat("es-AR", {style: 'currency', currency: 'ARS'}).format(resultado);
+            $("#txtTotal").val(strResultado);
+        }
+    });  
+
+    */
+</script>
 
 
 
